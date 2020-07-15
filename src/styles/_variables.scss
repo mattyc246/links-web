@@ -1,6 +1,8 @@
 // Superhero 4.5.0
 // Bootswatch
 
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
+
 //
 // Color system
 //
@@ -51,7 +53,9 @@ $border-radius-lg:            0px !default;
 $border-radius-sm:            0px !default;
 
 // Fonts
-$font-family-sans-serif:      "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-sans-serif:      "Baloo 2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$font-size-sm:                16px;
 
 $text-muted:                  rgba(255,255,255,.4) !default;
 

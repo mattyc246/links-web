@@ -25,7 +25,7 @@ const Footer = () => {
     <StyledFooter className="py-5">
       <Container fluid>
         <Row>
-          <Col xs={6} md={4}>
+          <Col xs={6} lg={4}>
             <h6>Links Engineering Sdn Bhd</h6>
             <Navbar className="navbar-dark">
               <Nav className="nav d-flex flex-column">
@@ -49,7 +49,7 @@ const Footer = () => {
               </Nav>
             </Navbar>
           </Col>
-          <Col className="text-center" xs={6} md={4}>
+          <Col className="text-center" xs={6} lg={4}>
             <h6>Find us on social media:</h6>
             <Icons className="my-4 d-flex justify-content-center">
               <FontAwesomeIcon icon={faFacebook} />

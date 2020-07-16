@@ -1,3 +1,11 @@
 @import "./variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/superhero/bootswatch";
+
+* {
+  box-sizing: border-box;
+}
+
+.text-justify {
+  text-align: justify;
+}

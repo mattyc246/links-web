@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Links`,
+    description: `Links Engineering Sdn Bhd is a family run and owned performance automotive workshop, specializing in Japanese and European performance vehicles.`,
     author: `@gatsbyjs`,
   },
   plugins: [

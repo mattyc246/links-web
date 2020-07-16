@@ -51,7 +51,7 @@ const About = () => {
                 est Lorem ipsum dolor sit amet.
               </p>
               <Button
-                className="w-25 mx-auto d-block"
+                className="w-25 mx-auto my-4 d-block"
                 as={Link}
                 to="/contact"
                 variant="primary"

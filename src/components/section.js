@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledSection = styled.section`
   width: 100%;
-  ${props => props.noPad ? "padding: 0;" : "padding: 2rem 0;"}
+  ${props => props.noPad ? "padding: 0;" : "padding: 3rem 0;"}
   background-color: ${props => (props.light ? "#fff" : "transparent")};
   color: ${props => props.light ? "#313131" : "#fff"};
 `

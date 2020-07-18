@@ -23,7 +23,7 @@ const Icons = styled.div`
 const Footer = () => {
   return (
     <StyledFooter className="py-5">
-      <Container fluid>
+      <Container>
         <Row>
           <Col xs={6} lg={4}>
             <h6>Links Engineering Sdn Bhd</h6>

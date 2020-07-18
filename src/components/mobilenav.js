@@ -62,27 +62,27 @@ const MobileNav = () => {
       </div>
       <StyledLinks className="nav" open={open}>
         <Nav.Item>
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} activeClassName="active" to="/">
             Home
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/about">
+          <Nav.Link as={Link} activeClassName="active" to="/about">
             About
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/tuning">
+          <Nav.Link as={Link} activeClassName="active" to="/tuning">
             Tuning
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/products">
+          <Nav.Link as={Link} activeClassName="active" to="/products">
             Products
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} to="/contact">
+          <Nav.Link as={Link} activeClassName="active" to="/contact">
             Contact
           </Nav.Link>
         </Nav.Item>

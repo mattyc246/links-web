@@ -20,7 +20,7 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   top: 0px;
   left: 0px;
-  z-index: 3;
+  z-index: 99;
   transition: height 0.5s ease-in;
 `
 

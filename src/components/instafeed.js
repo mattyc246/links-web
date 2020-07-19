@@ -40,9 +40,8 @@ const Feed = ({
         ? edges.map(post => {
             const {thumbnails, timestamp} = post.node
             return (
-              <li>
+              <li key={timestamp}>
                 <img
-                  key={timestamp}
                   src={thumbnails[4].src}
                   alt={timestamp}
                 />

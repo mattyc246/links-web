@@ -14,6 +14,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -36,6 +37,14 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-page-transitions",
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `https://links-cms.herokuapp.com`,
+        contentTypes: [`vehicle`, `tuning`],
+        singleTypes: [`homepage`],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

@@ -42,7 +42,7 @@ module.exports = {
       options: {
         apiURL: `https://links-cms.herokuapp.com`,
         contentTypes: [`vehicle`, `tuning`],
-        singleTypes: [`homepage`, `aboutpage`],
+        singleTypes: [`homepage`, `aboutpage`, `tuning-page`],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

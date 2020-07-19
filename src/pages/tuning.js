@@ -1,48 +1,69 @@
 import React from 'react'
+import styled from "styled-components"
+import {graphql} from "gatsby"
+import Markdown from "react-markdown"
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Section from '../components/section'
 import { Container, Row, Col } from 'react-bootstrap'
 
-const Tuning = () => {
+const DoubleImage = styled.div`
+  width: 100%;
+  min-height: 50vh;
+  position: relative;
+
+  img {
+    width: 55%;
+    height: 25vh;
+    object-fit: cover;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+
+    :last-child {
+      top: 70%;
+      left: 70%;
+      z-index: 1;
+    }
+  }
+`
+
+const Tuning = ({data}) => {
+  const {tuning_image, tuning_body, disclaimer_body} = data.strapiTuningPage
   return (
     <Layout>
       <SEO title="Tuning" />
       <Section>
         <Container>
-          <Row>
-            <Col lg={6}></Col>
+          <Row className="flex-column-reverse flex-lg-row">
+            <Col lg={6}>
+              <DoubleImage>
+                {
+                  tuning_image.map(image => {
+                    return(
+                      <img className="shadow-lg" key={image.id} src={image.url} alt={image.alternativeText} />
+                    )
+                  })
+                }
+              </DoubleImage>
+            </Col>
             <Col lg={6}>
               <h2 className="text-center text-lg-left my-4">Links Tuning</h2>
-              <p className="text-justify">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
-                et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet.
-              </p>
+              <div className="text-justify">
+                <Markdown source={tuning_body} />
+              </div>
             </Col>
           </Row>
         </Container>
       </Section>
       <Section light="true">
         <Container>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </p>
+          <div className="text-justify">
+            <Markdown source={disclaimer_body} />
+          </div>
         </Container>
       </Section>
       <Section>
@@ -53,5 +74,19 @@ const Tuning = () => {
     </Layout>
   )
 }
+
+export const PageQuery = graphql`
+  query Tuningpage {
+    strapiTuningPage {
+      tuning_body
+      tuning_image {
+        alternativeText
+        url
+        id
+      }
+      disclaimer_body
+    }
+  }
+`
 
 export default Tuning

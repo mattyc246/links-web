@@ -24,6 +24,8 @@
     "gatsby-plugin-styled-components": "^3.3.10",
     "gatsby-source-filesystem": "^2.3.14",
     "gatsby-source-instagram": "^0.8.0",
+    "gatsby-source-strapi": "0.0.12",
+    "gatsby-transformer-remark": "^2.8.25",
     "gatsby-transformer-sharp": "^2.5.7",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
@@ -31,6 +33,7 @@
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
+    "react-markdown": "^4.3.1",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

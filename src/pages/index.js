@@ -14,6 +14,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Container, Row, Col, Button } from "react-bootstrap"
 import Banner from "../components/banner"
+import InstaFeed from "../components/instafeed"
 
 const HeroContent = styled.div`
   color: #fff;
@@ -77,7 +78,9 @@ const IndexPage = () => (
         </Row>
       </Container>
     </Section>
-    <Section></Section>
+    <Section>
+        <InstaFeed />
+    </Section>
     <Section light="true">
       <Container>
         <Row className="align-items-center">

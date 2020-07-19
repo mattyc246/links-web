@@ -50,7 +50,7 @@ const Tuning = ({data}) => {
                 }
               </DoubleImage>
             </Col>
-            <Col lg={6}>
+            <Col lg={{span: 5, offset: 1}}>
               <h2 className="text-center text-lg-left my-4">Links Tuning</h2>
               <div className="text-justify">
                 <Markdown source={tuning_body} />

@@ -4,13 +4,14 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Section from "../components/section"
 import Banner from "../components/banner"
-import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faFacebookMessenger,
   faFacebook,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons"
+import ContactForm from "../components/contactform"
 
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 34px;
@@ -31,9 +32,9 @@ const Contact = () => {
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15937.170453715911!2d101.618019!3d3.015818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9031bb002ed83ee6!2sLinks%20Engineering%20Sdn%20Bhd!5e0!3m2!1sen!2smy!4v1594900957675!5m2!1sen!2smy"
                 width="100%"
                 height="450"
-                frameborder="0"
+                frameBorder="0"
                 style={{ borderRadius: "5px" }}
-                allowfullscreen=""
+                allowFullScreen=""
                 aria-hidden="false"
               ></iframe>
             </Col>
@@ -103,49 +104,7 @@ const Contact = () => {
           <Row>
             <Col lg={{ span: 8, offset: 2 }}>
               <h2 className="text-center my-4">Get in touch with us</h2>
-              <p>
-                Drop us a message, we will aim to respond to all enquiries
-                within 24-48 hours.
-              </p>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control
-                    className="border border-dark"
-                    type="text"
-                    placeholder="Full Name"
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    className="border border-dark"
-                    type="email"
-                    placeholder="Email Address"
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Subject</Form.Label>
-                  <Form.Control className="border border-dark" as="select">
-                    <option disabled>Choose your enquiry type</option>
-                    <option>General</option>
-                    <option>Business</option>
-                    <option>Dealer</option>
-                    <option>Support</option>
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    className="border border-dark"
-                    as="textarea"
-                    rows="3"
-                  />
-                </Form.Group>
-                <Button variant="primary" className="mx-auto d-block">
-                  Submit
-                </Button>
-              </Form>
+              <ContactForm />
             </Col>
           </Row>
         </Container>

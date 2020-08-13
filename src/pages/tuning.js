@@ -39,7 +39,7 @@ const Tuning = ({data}) => {
       <SEO title="Tuning" />
       <Section>
         <Container>
-          <Row className="flex-column-reverse flex-lg-row">
+          <Row className="align-items-center flex-column-reverse flex-lg-row">
             <Col lg={6}>
               <DoubleImage>
                 {

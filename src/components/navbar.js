@@ -22,8 +22,8 @@ const Navigator = () => {
               alt="links logo"
             />
           </Navbar.Brand>
-          <Nav.Link as={Link} activeClassName="active" to="/products">
-            Products
+          <Nav.Link as={Link} activeClassName="active" to="/services">
+            Services
           </Nav.Link>
           <Nav.Link as={Link} activeClassName="active" to="/contact">
             Contact

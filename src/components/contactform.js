@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import Loader from "../images/loader.gif"
+import Loader from "../images/loader.svg"
 import { Form, Button } from "react-bootstrap"
 import Axios from "axios"
 

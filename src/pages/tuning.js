@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Section from '../components/section'
 import { Container, Row, Col } from 'react-bootstrap'
+import Content from '../components/content'
 
 const DoubleImage = styled.div`
   width: 100%;
@@ -51,10 +52,9 @@ const Tuning = ({data}) => {
               </DoubleImage>
             </Col>
             <Col lg={{span: 5, offset: 1}}>
-              <h2 className="text-center text-lg-left my-4">Links Tuning</h2>
-              <div className="text-justify">
+              <Content>
                 <Markdown source={tuning_body} />
-              </div>
+              </Content>
             </Col>
           </Row>
         </Container>
@@ -68,7 +68,7 @@ const Tuning = ({data}) => {
       </Section>
       <Section>
         <Container>
-          <h2 className="text-center text-lg-left my-4">Tuning Menu</h2>
+          <h2 className="text-center my-4">Interactive Tuning Menu Coming Soon...</h2>
         </Container>
       </Section>
     </Layout>

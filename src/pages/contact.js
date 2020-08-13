@@ -42,9 +42,7 @@ const Contact = () => {
               <Row>
                 <Col xs={5}>
                   <div className="w-100 p-3">
-                    <p>
-                      Address:
-                    </p>
+                    <p>Address:</p>
                     <p>
                       112, Jalan Puteri 5/5, <br />
                       Bandar Puteri, Puchong, <br />
@@ -56,8 +54,8 @@ const Contact = () => {
                 <Col xs={7}>
                   <div className="p-3 text-right">
                     <p>
-                      <span className="mr-3">Tel:</span> 03-1234-5678
-                      (Office) <br />
+                      <span className="mr-3">Tel:</span> 03-1234-5678 (Office){" "}
+                      <br />
                       012-392-2022 (Mr. Kee) <br /> 012-202-2822 (Shirley){" "}
                       <br /> 012-332-3232 (Chester)
                     </p>
@@ -74,19 +72,40 @@ const Contact = () => {
                   <div className="p-4 text-center">
                     <h5>Social Media:</h5>
                     <div className="d-flex align-items-center p-3 mx-auto my-4">
-                      <StyledIcon icon={faFacebook} />
+                      <a
+                        href="https://www.facebook.com/links.com.my/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-primary"
+                      >
+                        <StyledIcon icon={faFacebook} />
+                      </a>
                       <p className="m-0">
                         Drop us a like and share on Facebook
                       </p>
                     </div>
                     <div className="d-flex align-items-center p-3 mx-auto my-4">
-                      <StyledIcon icon={faFacebookMessenger} />
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-primary"
+                      >
+                        <StyledIcon icon={faFacebookMessenger} />
+                      </a>
                       <p className="m-0">
                         Send your enquiries via Facebook Messenger
                       </p>
                     </div>
                     <div className="d-flex align-items-center p-3 mx-auto my-4">
-                      <StyledIcon icon={faInstagram} />
+                      <a
+                        href="https://instagram.com/shirleylinks"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-primary"
+                      >
+                        <StyledIcon icon={faInstagram} />
+                      </a>
                       <p className="m-0">
                         Like, comment and DM us on Instagram
                       </p>

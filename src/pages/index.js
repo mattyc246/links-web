@@ -1,16 +1,22 @@
 import React, { useState } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Markdown from "react-markdown"
 import styled from "styled-components"
-import Aventador from "../videos/aventador_lfe.mp4"
 import Section from "../components/section"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Container, Row, Col } from "react-bootstrap"
+import Content from "../components/content"
+import { Container, Row, Col, Button } from "react-bootstrap"
 import Banner from "../components/banner"
 import InstaFeed from "../components/instafeed"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons"
+import {
+  faChevronDown,
+  faVolumeMute,
+  faVolumeUp,
+} from "@fortawesome/free-solid-svg-icons"
+import Splash from "../components/splash"
+import { useEffect } from "react"
 
 const Overlay = styled.div`
   width: 100%;
@@ -52,7 +58,6 @@ const VideoContainer = styled.div`
     height: 100%;
   }
 
-
   @media screen and (min-width: 1024px) {
     height: calc(100vh - 82px);
 
@@ -67,25 +72,50 @@ const VideoContainer = styled.div`
 
 const IndexPage = ({ data }) => {
   const [isMuted, setIsMuted] = useState(true)
+  const [showSplash, setShowSplash] = useState(true)
   const {
+    hero_background_video,
     history_body,
     history_image,
     services_body,
     services_images,
   } = data.strapiHomepage
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplash(false)
+    }, 5000)
+  }, [])
+
   return (
     <Layout>
       <SEO title="Home" />
+      {
+        showSplash ? <Splash /> : ""
+      }
       <Section noPad>
         <VideoContainer>
-          <video src={Aventador} autoPlay loop {...(isMuted ? {muted: true} : {muted: false})}></video>
+          <video
+            src={hero_background_video[0].url}
+            autoPlay
+            loop
+            {...(isMuted ? { muted: true } : { muted: false })}
+          ></video>
           <Overlay>
             <div className="scrolly w-100 d-flex justify-content-between">
               <div />
               <FontAwesomeIcon className="bouncy" icon={faChevronDown} />
-              {
-                isMuted ? <FontAwesomeIcon onClick={() => setIsMuted(false)} icon={faVolumeMute} /> : <FontAwesomeIcon onClick={() => setIsMuted(true)} icon={faVolumeUp} />
-              }
+              {isMuted ? (
+                <FontAwesomeIcon
+                  onClick={() => setIsMuted(false)}
+                  icon={faVolumeMute}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={() => setIsMuted(true)}
+                  icon={faVolumeUp}
+                />
+              )}
             </div>
           </Overlay>
         </VideoContainer>
@@ -95,10 +125,17 @@ const IndexPage = ({ data }) => {
         <Container>
           <Row className="align-items-center">
             <Col lg={6}>
-              <h2 className="text-center text-lg-left my-4">Our History</h2>
-              <div className="text-justify">
+              <Content>
                 <Markdown source={history_body} />
-              </div>
+              </Content>
+              <Button
+                as={Link}
+                to="/about"
+                variant="primary"
+                className="my-3 d-inline-block text-white"
+              >
+                Read More
+              </Button>
             </Col>
             <Col lg={{ span: 5, offset: 1 }}>
               <img
@@ -132,10 +169,17 @@ const IndexPage = ({ data }) => {
               </Row>
             </Col>
             <Col lg={{ span: 5, offset: 1 }}>
-              <h2 className="text-center text-lg-left my-4">Our Services</h2>
-              <div className="text-justify">
+              <Content>
                 <Markdown source={services_body} />
-              </div>
+              </Content>
+              <Button
+                as={Link}
+                to="/services"
+                variant="primary"
+                className="my-3 d-inline-block text-white"
+              >
+                See Our Services
+              </Button>
             </Col>
           </Row>
         </Container>
@@ -147,9 +191,7 @@ const IndexPage = ({ data }) => {
 export const PageQuery = graphql`
   query Homepage {
     strapiHomepage {
-      hero_body
-      hero_image {
-        alternativeText
+      hero_background_video {
         url
       }
       history_body

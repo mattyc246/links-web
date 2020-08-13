@@ -9,3 +9,12 @@
 .text-justify {
   text-align: justify;
 }
+
+@keyframes bounce {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -10px;
+  }
+}

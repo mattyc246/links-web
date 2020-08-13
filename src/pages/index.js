@@ -73,6 +73,8 @@ const VideoContainer = styled.div`
 const IndexPage = ({ data }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [showSplash, setShowSplash] = useState(true)
+  const [showPage, setShowPage] = useState(false)
+
   const {
     hero_background_video,
     history_body,
@@ -85,106 +87,114 @@ const IndexPage = ({ data }) => {
     setTimeout(() => {
       setShowSplash(false)
     }, 5000)
+
+    setTimeout(() => {
+      setShowPage(true)
+    }, 2000)
   }, [])
 
   return (
-    <Layout>
-      <SEO title="Home" />
-      {
-        showSplash ? <Splash /> : ""
-      }
-      <Section noPad>
-        <VideoContainer>
-          <video
-            src={hero_background_video[0].url}
-            autoPlay
-            loop
-            {...(isMuted ? { muted: true } : { muted: false })}
-          ></video>
-          <Overlay>
-            <div className="scrolly w-100 d-flex justify-content-between">
-              <div />
-              <FontAwesomeIcon className="bouncy" icon={faChevronDown} />
-              {isMuted ? (
-                <FontAwesomeIcon
-                  onClick={() => setIsMuted(false)}
-                  icon={faVolumeMute}
-                />
-              ) : (
-                <FontAwesomeIcon
-                  onClick={() => setIsMuted(true)}
-                  icon={faVolumeUp}
-                />
-              )}
-            </div>
-          </Overlay>
-        </VideoContainer>
-      </Section>
-      <Banner />
-      <Section light="true">
-        <Container>
-          <Row className="align-items-center">
-            <Col lg={6}>
-              <Content>
-                <Markdown source={history_body} />
-              </Content>
-              <Button
-                as={Link}
-                to="/about"
-                variant="primary"
-                className="my-3 d-inline-block text-white"
-              >
-                Read More
-              </Button>
-            </Col>
-            <Col lg={{ span: 5, offset: 1 }}>
-              <img
-                className="w-100"
-                src={history_image[0].url}
-                alt={history_image[0].alternativeText}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </Section>
-      <Section>
-        <InstaFeed />
-      </Section>
-      <Section light="true">
-        <Container>
-          <Row className="align-items-center">
-            <Col lg={6}>
-              <Row>
-                {services_images.map(image => {
-                  return (
-                    <Col key={image.id} className="my-3" xs={6} lg={4}>
-                      <img
-                        className="w-75 mx-auto d-block"
-                        src={image.url}
-                        alt={image.alternativeText}
-                      />
-                    </Col>
-                  )
-                })}
+    <>
+      {showSplash ? <Splash /> : ""}
+      {showPage ? (
+        <Layout>
+          <SEO title="Home" />
+          <Section noPad>
+            <VideoContainer>
+              <video
+                src={hero_background_video[0].url}
+                autoPlay
+                loop
+                {...(isMuted ? { muted: true } : { muted: false })}
+              ></video>
+              <Overlay>
+                <div className="scrolly w-100 d-flex justify-content-between">
+                  <div />
+                  <FontAwesomeIcon className="bouncy" icon={faChevronDown} />
+                  {isMuted ? (
+                    <FontAwesomeIcon
+                      onClick={() => setIsMuted(false)}
+                      icon={faVolumeMute}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      onClick={() => setIsMuted(true)}
+                      icon={faVolumeUp}
+                    />
+                  )}
+                </div>
+              </Overlay>
+            </VideoContainer>
+          </Section>
+          <Banner />
+          <Section light="true">
+            <Container>
+              <Row className="align-items-center">
+                <Col lg={6}>
+                  <Content>
+                    <Markdown source={history_body} />
+                  </Content>
+                  <Button
+                    as={Link}
+                    to="/about"
+                    variant="primary"
+                    className="my-3 d-inline-block text-white"
+                  >
+                    Read More
+                  </Button>
+                </Col>
+                <Col lg={{ span: 5, offset: 1 }}>
+                  <img
+                    className="w-100"
+                    src={history_image[0].url}
+                    alt={history_image[0].alternativeText}
+                  />
+                </Col>
               </Row>
-            </Col>
-            <Col lg={{ span: 5, offset: 1 }}>
-              <Content>
-                <Markdown source={services_body} />
-              </Content>
-              <Button
-                as={Link}
-                to="/services"
-                variant="primary"
-                className="my-3 d-inline-block text-white"
-              >
-                See Our Services
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </Section>
-    </Layout>
+            </Container>
+          </Section>
+          <Section>
+            <InstaFeed />
+          </Section>
+          <Section light="true">
+            <Container>
+              <Row className="align-items-center">
+                <Col lg={6}>
+                  <Row>
+                    {services_images.map(image => {
+                      return (
+                        <Col key={image.id} className="my-3" xs={6} lg={4}>
+                          <img
+                            className="w-75 mx-auto d-block"
+                            src={image.url}
+                            alt={image.alternativeText}
+                          />
+                        </Col>
+                      )
+                    })}
+                  </Row>
+                </Col>
+                <Col lg={{ span: 5, offset: 1 }}>
+                  <Content>
+                    <Markdown source={services_body} />
+                  </Content>
+                  <Button
+                    as={Link}
+                    to="/services"
+                    variant="primary"
+                    className="my-3 d-inline-block text-white"
+                  >
+                    See Our Services
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          </Section>
+        </Layout>
+      ) : (
+        ""
+      )}
+    </>
   )
 }
 

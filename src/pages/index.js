@@ -1,24 +1,73 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Markdown from "react-markdown"
 import styled from "styled-components"
-
+import Aventador from "../videos/aventador_lfe.mp4"
 import Section from "../components/section"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Container, Row, Col, Button } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import Banner from "../components/banner"
 import InstaFeed from "../components/instafeed"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronDown, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons"
 
-const HeroContent = styled.div`
-  color: #fff;
-  padding: 2rem 1.5rem;
+const Overlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 10px;
+
+  .scrolly {
+    display: none;
+  }
+
+  @media screen and (min-width: 992px) {
+    .scrolly {
+      display: block;
+      text-align: center;
+
+      .bouncy {
+        position: relative;
+        animation: bounce 0.5s infinite alternate-reverse;
+      }
+    }
+  }
+`
+
+const VideoContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  video {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  @media screen and (min-width: 1024px) {
+    height: calc(100vh - 82px);
+
+    video {
+      height: 100%;
+      width: 177.77777778vh; /* 100 * 16 / 9 */
+      min-width: 100%;
+      min-height: 56.25vw; /* 100 * 9 / 16 */
+    }
+  }
 `
 
 const IndexPage = ({ data }) => {
+  const [isMuted, setIsMuted] = useState(true)
   const {
-    hero_body,
-    hero_image,
     history_body,
     history_image,
     services_body,
@@ -28,24 +77,18 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       <Section noPad>
-        <Container fluid>
-          <Row className="align-items-center">
-            <Col lg={8}>
-              <img className="w-100 my-auto" src={hero_image[0].url} alt={hero_image[0].alternativeText} />
-            </Col>
-            <Col lg={4}>
-              <HeroContent>
-                <h3 className="text-center my-4">Latest Feature</h3>
-                <div className="text-justify">
-                  <Markdown source={hero_body} />
-                </div>
-                <Button className="mx-auto d-block my-4" variant="primary">
-                  See More
-                </Button>
-              </HeroContent>
-            </Col>
-          </Row>
-        </Container>
+        <VideoContainer>
+          <video src={Aventador} autoPlay loop {...(isMuted ? {muted: true} : {muted: false})}></video>
+          <Overlay>
+            <div className="scrolly w-100 d-flex justify-content-between">
+              <div />
+              <FontAwesomeIcon className="bouncy" icon={faChevronDown} />
+              {
+                isMuted ? <FontAwesomeIcon onClick={() => setIsMuted(false)} icon={faVolumeMute} /> : <FontAwesomeIcon onClick={() => setIsMuted(true)} icon={faVolumeUp} />
+              }
+            </div>
+          </Overlay>
+        </VideoContainer>
       </Section>
       <Banner />
       <Section light="true">
@@ -58,7 +101,11 @@ const IndexPage = ({ data }) => {
               </div>
             </Col>
             <Col lg={{ span: 5, offset: 1 }}>
-              <img className="w-100" src={history_image[0].url} alt={history_image[0].alternativeText} />
+              <img
+                className="w-100"
+                src={history_image[0].url}
+                alt={history_image[0].alternativeText}
+              />
             </Col>
           </Row>
         </Container>
@@ -71,19 +118,17 @@ const IndexPage = ({ data }) => {
           <Row className="align-items-center">
             <Col lg={6}>
               <Row>
-                {
-                  services_images.map(image => {
-                    return (
-                      <Col key={image.id} className="my-3" xs={6} lg={4}>
-                        <img
-                          className="w-75 mx-auto d-block"
-                          src={image.url}
-                          alt={image.alternativeText}
-                        />
-                      </Col>
-                    )
-                  })
-                }
+                {services_images.map(image => {
+                  return (
+                    <Col key={image.id} className="my-3" xs={6} lg={4}>
+                      <img
+                        className="w-75 mx-auto d-block"
+                        src={image.url}
+                        alt={image.alternativeText}
+                      />
+                    </Col>
+                  )
+                })}
               </Row>
             </Col>
             <Col lg={{ span: 5, offset: 1 }}>

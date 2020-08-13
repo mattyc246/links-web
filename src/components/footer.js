@@ -52,9 +52,30 @@ const Footer = () => {
           <Col className="text-center" xs={6} lg={4}>
             <h6>Find us on social media:</h6>
             <Icons className="my-4 d-flex justify-content-center">
-              <FontAwesomeIcon icon={faFacebook} />
-              <FontAwesomeIcon className="mx-3" icon={faYoutube} />
-              <FontAwesomeIcon icon={faInstagram} />
+              <a
+                href="https://www.facebook.com/links.com.my/"
+                rel="noreferrer"
+                target="_blank"
+                className="text-primary"
+              >
+                <FontAwesomeIcon icon={faFacebook} />
+              </a>
+              <a
+                href="/"
+                rel="noreferrer"
+                target="_blank"
+                className="text-primary"
+              >
+                <FontAwesomeIcon className="mx-3" icon={faYoutube} />
+              </a>
+              <a
+                href="https://instagram.com/shirleylinks"
+                rel="noreferrer"
+                target="_blank"
+                className="text-primary"
+              >
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
             </Icons>
           </Col>
           <Col className="text-center d-none d-lg-block" xs={0} lg={4}>

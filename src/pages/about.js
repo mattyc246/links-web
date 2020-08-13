@@ -8,6 +8,7 @@ import Section from "../components/section"
 import { Container, Row, Col, Button } from "react-bootstrap"
 import { Link } from "gatsby"
 import Banner from "../components/banner"
+import Content from "../components/content"
 
 const LowerLayer = styled.section`
   width: 100vw;
@@ -69,17 +70,16 @@ const About = ({data}) => {
         <Container>
           <Row className="align-items-center">
             <Col lg={6}>
-              <h2 className="text-center text-lg-left my-4">About Us</h2>
-              <div className="text-justify">
+              <Content>
                 <Markdown source={about_body} />
-              </div>
+              </Content>
               <Button
-                className="w-25 mx-auto my-4 d-block"
+                className="mx-auto my-4 d-inline-block"
                 as={Link}
                 to="/contact"
                 variant="primary"
               >
-                Contact Us
+                Get In Touch
               </Button>
             </Col>
             <Col lg={{ span: 5, offset: 1 }}>
@@ -99,12 +99,11 @@ const About = ({data}) => {
       <Banner />
       <Section>
         <Container>
-          <Row>
+          <Row className="align-items-center">
             <Col>
-              <h2 className="text-center text-lg-left my-4">Our Mission</h2>
-              <div className="text-justify">
+              <Content>
                 <Markdown source={mission_body} />
-              </div>
+              </Content>
             </Col>
           </Row>
         </Container>
@@ -112,14 +111,14 @@ const About = ({data}) => {
       <LowerLayer imageUrl={cta_image[0].url}>
         <UpperLayer>
           <Container>
-            <Row>
+            <Row className="align-items-center">
               <Col lg={{ span: 4, offset: 8 }}>
                 <h4 className="text-center text-lg-left my-4">
                   Find out more about the products and services we have to
                   offer.
                 </h4>
-                <Button className="mx-auto d-block my-4" variant="primary">
-                  View Products
+                <Button as={Link} to="/services" className="d-inline-block my-3" variant="primary">
+                  View Products & Services
                 </Button>
               </Col>
             </Row>

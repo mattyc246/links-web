@@ -77,8 +77,8 @@ const MobileNav = () => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link as={Link} activeClassName="active" to="/products">
-            Products
+          <Nav.Link as={Link} activeClassName="active" to="/services">
+            Services
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>

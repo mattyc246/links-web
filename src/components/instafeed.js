@@ -2,30 +2,12 @@ import React from "react"
 import styled from "styled-components"
 import { StaticQuery, graphql } from "gatsby"
 
-const InstaContainer = styled.ul`
-  display: none;
+const InstaContainer = styled.div`
+  display: flex;
   flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-
-  @media screen and (min-width: 992px) {
-    display: flex;
-  }
-
-  li {
-    height: 50vh;
-    flex-grow: 1;
-
-    @media screen and (min-width: 992px) {
-      height: 30vh;
-    }
-  }
 
   img {
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    vertical-align: bottom;
+    width: 20%;
   }
 `
 
@@ -38,14 +20,9 @@ const Feed = ({
     <InstaContainer>
       {edges.length > 0
         ? edges.map(post => {
-            const {thumbnails, timestamp} = post.node
+            const { original, timestamp } = post.node
             return (
-              <li key={timestamp}>
-                <img
-                  src={thumbnails[4].src}
-                  alt={timestamp}
-                />
-              </li>
+              <img src={original} alt={timestamp} />
             )
           })
         : ""}
@@ -58,14 +35,10 @@ const InstaFeed = () => {
     <StaticQuery
       query={graphql`
         query MyQuery {
-          allInstaNode(sort: { fields: timestamp, order: DESC }, limit: 8) {
+          allInstaNode(sort: { fields: timestamp, order: DESC }, limit: 10) {
             edges {
               node {
-                thumbnails {
-                  src
-                  config_width
-                  config_height
-                }
+                original
                 timestamp
               }
             }

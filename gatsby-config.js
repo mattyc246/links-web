@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
     title: `Links`,
@@ -38,11 +40,9 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-page-transitions",
     {
-      resolve: `gatsby-source-strapi`,
+      resolve: `gatsby-source-datocms`,
       options: {
-        apiURL: `https://links-cms.herokuapp.com`,
-        contentTypes: [`vehicle`, `tuning`],
-        singleTypes: [`homepage`, `aboutpage`, `tuning-page`, `productspage`],
+        apiToken: process.env.DATO_API_TOKEN,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

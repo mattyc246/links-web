@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 28px;
+  font-size: 22px;
   cursor: pointer;
 `
 
@@ -48,12 +48,12 @@ const StyledLinks = styled(Nav)`
 const MobileNav = () => {
   const [open, setOpen] = useState(false)
   return (
-    <StyledNav open={open} className="p-4 navbar bg-dark navbar-dark d-md-none">
+    <StyledNav open={open} className="py-4 navbar bg-dark navbar-dark d-md-none">
       <div className="w-100 d-flex justify-content-between align-items-center">
         <Navbar.Brand>
           <img
             src={Logo}
-            height="40"
+            height="30"
             className="d-inline-block align-top"
             alt="links logo"
           />
@@ -66,7 +66,7 @@ const MobileNav = () => {
             Home
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
+        {/* <Nav.Item>
           <Nav.Link as={Link} activeClassName="active" to="/about">
             About
           </Nav.Link>
@@ -85,7 +85,7 @@ const MobileNav = () => {
           <Nav.Link as={Link} activeClassName="active" to="/contact">
             Contact
           </Nav.Link>
-        </Nav.Item>
+        </Nav.Item> */}
       </StyledLinks>
     </StyledNav>
   )

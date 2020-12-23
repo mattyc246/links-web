@@ -5,8 +5,6 @@ import Logo from "../images/links.png"
 import { Navbar, Nav, Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookSquare, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
-import ButtonGroup from "react-bootstrap/ButtonGroup"
-import Button from "react-bootstrap/Button"
 import Dropdown from "react-bootstrap/Dropdown"
 
 const StyledLink = styled(Nav.Link)`

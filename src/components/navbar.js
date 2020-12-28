@@ -48,7 +48,6 @@ const StyledNavDD = styled(NavDropdownMenu)`
 `
 
 const Navigator = ({ allDatoCmsServicing, makes, models }) => {
-
   return (
     <Navbar className="d-none d-md-flex navbar-dark p-0" bg="dark" expand="md">
       <Container fluid className="pl-5">
@@ -73,8 +72,9 @@ const Navigator = ({ allDatoCmsServicing, makes, models }) => {
             {makes.distinct.map((make, idx) => {
               return (
                 <DropdownSubmenu title={make} key={`sub-upgrade-${idx}`}>
-                  {models.edges.map(({ node: model }, idx) => {
-                    if (model.make === make) {
+                  {models.edges
+                    .filter(({ node: model }) => model.make === make)
+                    .map(({ node: model }, idx) => {
                       return (
                         <NavDropdown.Item
                           key={`service-${model + idx}`}
@@ -84,8 +84,7 @@ const Navigator = ({ allDatoCmsServicing, makes, models }) => {
                           {model.modelDesignation}
                         </NavDropdown.Item>
                       )
-                    }
-                  })}
+                    })}
                 </DropdownSubmenu>
               )
             })}

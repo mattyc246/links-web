@@ -84,8 +84,9 @@ const MobileNav = ({ allDatoCmsServicing, makes, models }) => {
           {makes.distinct.map((make, idx) => {
             return (
               <DropdownSubmenu title={make} key={`sub-upgrade-${idx}`}>
-                {models.edges.map(({ node: model }, idx) => {
-                  if (model.make === make) {
+                {models.edges
+                  .filter(({ node: model }) => model.make === make)
+                  .map(({ node: model }, idx) => {
                     return (
                       <NavDropdown.Item
                         key={`service-${model + idx}`}
@@ -95,8 +96,7 @@ const MobileNav = ({ allDatoCmsServicing, makes, models }) => {
                         {model.modelDesignation}
                       </NavDropdown.Item>
                     )
-                  }
-                })}
+                  })}
               </DropdownSubmenu>
             )
           })}

@@ -5,6 +5,8 @@ import Logo from "../images/links.png"
 import { Navbar, Nav } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 22px;
@@ -45,10 +47,14 @@ const StyledLinks = styled(Nav)`
   }
 `
 
-const MobileNav = () => {
+const MobileNav = ({ allDatoCmsServicing, makes, models }) => {
   const [open, setOpen] = useState(false)
+
   return (
-    <StyledNav open={open} className="py-4 navbar bg-dark navbar-dark d-md-none">
+    <StyledNav
+      open={open}
+      className="py-4 navbar bg-dark navbar-dark d-md-none"
+    >
       <div className="w-100 d-flex justify-content-between align-items-center">
         <Navbar.Brand>
           <img
@@ -66,26 +72,48 @@ const MobileNav = () => {
             Home
           </Nav.Link>
         </Nav.Item>
-        {/* <Nav.Item>
-          <Nav.Link as={Link} activeClassName="active" to="/about">
-            About
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as={Link} activeClassName="active" to="/tuning">
-            Tuning
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as={Link} activeClassName="active" to="/services">
-            Services
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as={Link} activeClassName="active" to="/contact">
-            Contact
-          </Nav.Link>
-        </Nav.Item> */}
+        <NavDropdownMenu title="About">
+          <NavDropdown.Item as={Link} to="/">
+            About Us
+          </NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/blog">
+            Blog
+          </NavDropdown.Item>
+        </NavDropdownMenu>
+        <NavDropdownMenu title="Upgrades">
+          {makes.distinct.map((make, idx) => {
+            return (
+              <DropdownSubmenu title={make} key={`sub-upgrade-${idx}`}>
+                {models.edges.map(({ node: model }, idx) => {
+                  if (model.make === make) {
+                    return (
+                      <NavDropdown.Item
+                        key={`service-${model + idx}`}
+                        as={Link}
+                        to={`/upgrades/${model.slug}`}
+                      >
+                        {model.modelDesignation}
+                      </NavDropdown.Item>
+                    )
+                  }
+                })}
+              </DropdownSubmenu>
+            )
+          })}
+        </NavDropdownMenu>
+        <NavDropdownMenu title="Servicing">
+          {allDatoCmsServicing.edges.map(({ node: service }, idx) => {
+            return (
+              <NavDropdown.Item
+                key={`service-${idx}`}
+                as={Link}
+                to={`/servicing/${service.slug}`}
+              >
+                {service.title}
+              </NavDropdown.Item>
+            )
+          })}
+        </NavDropdownMenu>
       </StyledLinks>
     </StyledNav>
   )

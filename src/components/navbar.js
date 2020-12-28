@@ -1,10 +1,14 @@
 import React from "react"
 import styled from "styled-components"
-import {Link} from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import Logo from "../images/links.png"
 import { Navbar, Nav, Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookSquare, faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
+import {
+  faFacebookSquare,
+  faInstagram,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons"
 import Dropdown from "react-bootstrap/Dropdown"
 
 const StyledLink = styled(Nav.Link)`
@@ -30,7 +34,7 @@ const NavButtonDD = styled(Dropdown.Toggle)`
   text-transform: uppercase;
 
   :hover {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
   :focus {
@@ -43,7 +47,22 @@ const DDMenu = styled(Dropdown.Menu)`
   font-size: 14px;
 `
 
-const Navigator = () => {
+const Navigator = props => {
+  const { allDatoCmsServicing } = useStaticQuery(
+    graphql`
+      query Navigation {
+        allDatoCmsServicing(sort: { fields: title, order: ASC }) {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      }
+    `
+  )
+
   return (
     <Navbar className="d-none d-md-flex navbar-dark p-0" bg="dark" expand="md">
       <Container fluid className="pl-5">
@@ -57,12 +76,30 @@ const Navigator = () => {
         </Navbar.Brand>
         <Nav className="ml-auto d-flex align-items-center">
           <Dropdown>
-            <NavButtonDD variant="transparent">
-              About
-            </NavButtonDD>
+            <NavButtonDD variant="transparent">About</NavButtonDD>
             <DDMenu>
-              <Dropdown.Item as={Link} to="/">About Us</Dropdown.Item>
-              <Dropdown.Item as={Link} to="/blog">Blog</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/">
+                About Us
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/blog">
+                Blog
+              </Dropdown.Item>
+            </DDMenu>
+          </Dropdown>
+          <Dropdown>
+            <NavButtonDD variant="transparent">Servicing</NavButtonDD>
+            <DDMenu>
+              {allDatoCmsServicing.edges.map(({ node: service }, idx) => {
+                return (
+                  <Dropdown.Item
+                    key={`service-${idx}`}
+                    as={Link}
+                    to={`/servicing/${service.slug}`}
+                  >
+                    {service.title}
+                  </Dropdown.Item>
+                )
+              })}
             </DDMenu>
           </Dropdown>
           {/* <StyledLink as={Link} activeClassName="active" to="/about">

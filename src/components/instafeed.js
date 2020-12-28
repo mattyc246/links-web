@@ -22,7 +22,7 @@ const Feed = ({
         ? edges.map(post => {
             const { original, timestamp } = post.node
             return (
-              <img src={original} alt={timestamp} />
+              <img key={`post-${timestamp}`} src={original} alt={timestamp} />
             )
           })
         : ""}

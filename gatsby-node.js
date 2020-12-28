@@ -14,6 +14,13 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allDatoCmsServicing {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `).then(result => {
       result.data.allDatoCmsBlog.edges.map(({ node: blog }) => {
@@ -22,6 +29,15 @@ exports.createPages = ({ graphql, actions }) => {
           component: path.resolve(`./src/templates/blog-post-template.js`),
           context: {
             slug: blog.slug,
+          },
+        })
+      })
+      result.data.allDatoCmsServicing.edges.map(({ node: service }) => {
+        createPage({
+          path: `servicing/${service.slug}`,
+          component: path.resolve(`./src/templates/servicing-page-template.js`),
+          context: {
+            slug: service.slug,
           },
         })
       })

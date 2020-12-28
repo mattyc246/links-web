@@ -12,18 +12,21 @@ const BlogHeader = styled.div`
   position: relative;
 
   .details {
-    border-top-left-radius: 10px;
     position: absolute;
-    padding: 1rem;
+    padding: 0.5rem;
     bottom: 0;
     right: 0;
     max-width: 70%;
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
+
+    h1 {
+      font-size: 24px;
+    }
   }
 
   img {

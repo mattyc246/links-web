@@ -21,6 +21,13 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allDatoCmsUpgrade {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `).then(result => {
       result.data.allDatoCmsBlog.edges.map(({ node: blog }) => {
@@ -32,6 +39,7 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
+
       result.data.allDatoCmsServicing.edges.map(({ node: service }) => {
         createPage({
           path: `servicing/${service.slug}`,
@@ -41,6 +49,17 @@ exports.createPages = ({ graphql, actions }) => {
           },
         })
       })
+
+      result.data.allDatoCmsUpgrade.edges.map(({ node: upgrade }) => {
+        createPage({
+          path: `upgrades/${upgrade.slug}`,
+          component: path.resolve(`./src/templates/upgrade-page-template.js`),
+          context: {
+            slug: upgrade.slug,
+          },
+        })
+      })
+
       resolve()
     })
   })

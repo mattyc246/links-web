@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 import Logo from "../images/links.png"
 import { Navbar, Nav, Container } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +9,8 @@ import {
   faInstagram,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons"
-import Dropdown from "react-bootstrap/Dropdown"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 
 const StyledLink = styled(Nav.Link)`
   text-transform: uppercase;
@@ -24,8 +25,8 @@ const StyledLink = styled(Nav.Link)`
   }
 `
 
-const NavButtonDD = styled(Dropdown.Toggle)`
-  padding: 1rem;
+const StyledNavDD = styled(NavDropdownMenu)`
+  padding: 0.5rem 1rem;
   background-color: transparent;
   height: 100%;
   outline: none;
@@ -40,29 +41,13 @@ const NavButtonDD = styled(Dropdown.Toggle)`
   :focus {
     box-shadow: none;
   }
+
+  .dropdown-item {
+    font-size: 14px;
+  }
 `
 
-const DDMenu = styled(Dropdown.Menu)`
-  text-transform: uppercase;
-  font-size: 14px;
-`
-
-const Navigator = props => {
-  const { allDatoCmsServicing } = useStaticQuery(
-    graphql`
-      query Navigation {
-        allDatoCmsServicing(sort: { fields: title, order: ASC }) {
-          edges {
-            node {
-              title
-              slug
-            }
-          }
-        }
-      }
-    `
-  )
-
+const Navigator = ({ allDatoCmsServicing, makes, models }) => {
   return (
     <Navbar className="d-none d-md-flex navbar-dark p-0" bg="dark" expand="md">
       <Container fluid className="pl-5">
@@ -75,45 +60,48 @@ const Navigator = props => {
           />
         </Navbar.Brand>
         <Nav className="ml-auto d-flex align-items-center">
-          <Dropdown>
-            <NavButtonDD variant="transparent">About</NavButtonDD>
-            <DDMenu>
-              <Dropdown.Item as={Link} to="/">
-                About Us
-              </Dropdown.Item>
-              <Dropdown.Item as={Link} to="/blog">
-                Blog
-              </Dropdown.Item>
-            </DDMenu>
-          </Dropdown>
-          <Dropdown>
-            <NavButtonDD variant="transparent">Servicing</NavButtonDD>
-            <DDMenu>
-              {allDatoCmsServicing.edges.map(({ node: service }, idx) => {
-                return (
-                  <Dropdown.Item
-                    key={`service-${idx}`}
-                    as={Link}
-                    to={`/servicing/${service.slug}`}
-                  >
-                    {service.title}
-                  </Dropdown.Item>
-                )
-              })}
-            </DDMenu>
-          </Dropdown>
-          {/* <StyledLink as={Link} activeClassName="active" to="/about">
-            About
-          </StyledLink>
-          <StyledLink as={Link} activeClassName="active" to="/tuning">
-            Tuning
-          </StyledLink>
-          <StyledLink as={Link} activeClassName="active" to="/services">
-            Services
-          </StyledLink>
-          <StyledLink as={Link} activeClassName="active" to="/contact">
-            Contact
-          </StyledLink> */}
+          <StyledNavDD title="About">
+            <NavDropdown.Item as={Link} to="/">
+              About Us
+            </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/blog">
+              Blog
+            </NavDropdown.Item>
+          </StyledNavDD>
+          <StyledNavDD title="Upgrades">
+            {makes.distinct.map((make, idx) => {
+              return (
+                <DropdownSubmenu title={make} key={`sub-upgrade-${idx}`}>
+                  {models.edges
+                    .filter(({ node: model }) => model.make === make)
+                    .map(({ node: model }, idx) => {
+                      return (
+                        <NavDropdown.Item
+                          key={`service-${model + idx}`}
+                          as={Link}
+                          to={`/upgrades/${model.slug}`}
+                        >
+                          {model.modelDesignation}
+                        </NavDropdown.Item>
+                      )
+                    })}
+                </DropdownSubmenu>
+              )
+            })}
+          </StyledNavDD>
+          <StyledNavDD title="Servicing">
+            {allDatoCmsServicing.edges.map(({ node: service }, idx) => {
+              return (
+                <NavDropdown.Item
+                  key={`service-${idx}`}
+                  as={Link}
+                  to={`/servicing/${service.slug}`}
+                >
+                  {service.title}
+                </NavDropdown.Item>
+              )
+            })}
+          </StyledNavDD>
           <StyledLink>
             <FontAwesomeIcon icon={faWhatsapp} />
           </StyledLink>

@@ -29,13 +29,43 @@ const Layout = ({ children, seo }) => {
               ...GatsbyDatoCmsFaviconMetaTags
             }
           }
+          allDatoCmsServicing(sort: { fields: title, order: ASC }) {
+            edges {
+              node {
+                title
+                slug
+              }
+            }
+          }
+          makes: allDatoCmsUpgrade {
+            distinct(field: make)
+          }
+          models: allDatoCmsUpgrade(
+            sort: { fields: modelDesignation, order: ASC }
+          ) {
+            edges {
+              node {
+                make
+                modelDesignation
+                slug
+              }
+            }
+          }
         }
       `}
-      render={data => (
+      render={({ datoCmsSite, allDatoCmsServicing, makes, models }) => (
         <>
-          <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} seo={seo} />
-          <Navbar />
-          <MobileNav />
+          <HelmetDatoCms favicon={datoCmsSite.faviconMetaTags} seo={seo} />
+          <Navbar
+            allDatoCmsServicing={allDatoCmsServicing}
+            makes={makes}
+            models={models}
+          />
+          <MobileNav
+            allDatoCmsServicing={allDatoCmsServicing}
+            makes={makes}
+            models={models}
+          />
           <PageTransition
             defaultStyle={{
               transition: `opacity 300ms ease-in-out`,

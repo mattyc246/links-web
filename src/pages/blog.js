@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+import PageTitle from "../components/pagetitle"
+import moment from "moment"
 import styled from "styled-components"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
@@ -24,6 +26,7 @@ const StyledList = styled.ul`
 
   li {
     padding-left: 1rem;
+    text-transform: capitalize;
   }
 `
 
@@ -67,20 +70,13 @@ const Blog = ({ data }) => {
     <Layout seo={seoMetaTags}>
       <Section light="true">
         <Container>
-          <h1 className="my-4">
+          <PageTitle className="my-4">
             Blog {filterCategory ? `- ${filterCategory}` : ""}
-          </h1>
-          {filterCategory ? (
-            <ClickableTag onClick={() => setFilterCategory(null)}>
-              Clear Filter
-            </ClickableTag>
-          ) : (
-            ""
-          )}
+          </PageTitle>
           <Row>
             <Col xs={{ span: 12, order: 2 }} md={{ span: 9, order: 1 }}>
               {blogPosts.map((blog, index) => {
-                const { title, slug, blurb, thumbnail, tags } = blog.node
+                const { title, slug, blurb, thumbnail, tags, meta } = blog.node
                 return (
                   <React.Fragment key={index}>
                     <Row>
@@ -90,6 +86,10 @@ const Blog = ({ data }) => {
                       <Col md={7} className="h-100">
                         <div className="d-flex flex-column">
                           <h2>{title}</h2>
+                          <small className="text-light">
+                            Published On:{" "}
+                            {moment(meta.publishedAt).format("MMMM Do YYYY")}
+                          </small>
                           <p className="my-3">
                             Tags:{" "}
                             {tags.split(",").map((tag, idx) => {
@@ -154,13 +154,27 @@ const Blog = ({ data }) => {
                     )
                   })}
                 </StyledList>
-                <h3>Categories</h3>
+                <h3 className="mt-4">Categories</h3>
                 <hr />
+                {filterCategory ? (
+                  <Button
+                    className="my-3"
+                    variant="dark"
+                    onClick={() => setFilterCategory(null)}
+                    block
+                  >
+                    Clear Filter
+                  </Button>
+                ) : (
+                  ""
+                )}
                 <StyledList>
                   {categories.map((category, idx) => {
                     return (
                       <li key={`cat-${idx}`}>
-                        <ClickableTag onClick={() => setFilterCategory(category)}>
+                        <ClickableTag
+                          onClick={() => setFilterCategory(category)}
+                        >
                           {category}
                         </ClickableTag>
                       </li>
@@ -178,7 +192,7 @@ const Blog = ({ data }) => {
 
 export const PageQuery = graphql`
   query Blog {
-    blog: allDatoCmsBlog {
+    blog: allDatoCmsBlog(sort: { fields: meta___publishedAt, order: DESC }) {
       edges {
         node {
           title
@@ -191,6 +205,9 @@ export const PageQuery = graphql`
           }
           blurb
           tags
+          meta {
+            publishedAt
+          }
         }
       }
     }

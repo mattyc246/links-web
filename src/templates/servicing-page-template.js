@@ -1,4 +1,5 @@
 import React from "react"
+import PageTitle from "../components/pagetitle"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
@@ -22,7 +23,7 @@ const ServicingPageTemplate = ({ data }) => {
             alt="Links Engineering"
             style={{ width: "300px" }}
           />
-          <h1 className="text-center mb-4">{title} Servicing</h1>
+          <PageTitle className="text-center mb-4">{title} Servicing</PageTitle>
           <Container className="my-5 px-5">
             <div
               dangerouslySetInnerHTML={{

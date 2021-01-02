@@ -1,7 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
 import styled from "styled-components"
-// import Feed from "../components/instafeed"
 import { graphql } from "gatsby"
 import Markdown from "react-markdown"
 import Section from "../components/section"
@@ -89,11 +88,6 @@ const IndexPage = ({ data }) => {
             </Row>
           </Container>
         </Section>
-        {/* <Section light="true">
-          <Container>
-            <Feed />
-          </Container>
-        </Section> */}
         <Section light="true">
           <Container>
             <Row>

@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 import PageTitle from "../components/pagetitle"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
@@ -6,6 +7,14 @@ import Layout from "../components/layout"
 import Section from "../components/section"
 import Container from "react-bootstrap/Container"
 import Logo from "../images/links.png"
+
+const FlexImg = styled.div`
+  width: 50%;
+
+  @media screen and (min-width: 768px) {
+    width: 25%;
+  }
+`
 
 const ServicingPageTemplate = ({ data }) => {
   const {
@@ -15,7 +24,7 @@ const ServicingPageTemplate = ({ data }) => {
   return (
     <Layout seo={seoMetaTags}>
       <Section light="true" noPad>
-        <Img fluid={bannerImage.fluid} style={{ maxHeight: "500px" }} />
+        <Img fluid={bannerImage.fluid} alt={bannerImage.alt} />
         <Section light="true">
           <img
             className="d-block mx-auto my-4"
@@ -31,14 +40,12 @@ const ServicingPageTemplate = ({ data }) => {
               }}
             ></div>
           </Container>
-          <div className="d-flex">
+          <div className="d-flex flex-wrap">
             {gallery.map((image, idx) => {
               return (
-                <Img
-                  key={`gallery-${idx}`}
-                  fluid={image.fluid}
-                  style={{ width: "25%" }}
-                />
+                <FlexImg key={`gallery-${idx}`}>
+                  <Img fluid={image.fluid} alt={image.alt} />
+                </FlexImg>
               )
             })}
           </div>
@@ -62,13 +69,13 @@ export const pageQuery = graphql`
         }
       }
       bannerImage {
-        fluid(maxWidth: 1920, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 1920) {
           ...GatsbyDatoCmsSizes
         }
         alt
       }
       gallery {
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 600) {
           ...GatsbyDatoCmsSizes
         }
         alt

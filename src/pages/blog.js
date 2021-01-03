@@ -73,6 +73,7 @@ const Blog = ({ data }) => {
           <PageTitle className="my-4">
             Blog {filterCategory ? `- ${filterCategory}` : ""}
           </PageTitle>
+          <hr />
           <Row>
             <Col xs={{ span: 12, order: 2 }} md={{ span: 9, order: 1 }}>
               {blogPosts.map((blog, index) => {
@@ -154,7 +155,7 @@ const Blog = ({ data }) => {
                     )
                   })}
                 </StyledList>
-                <h3 className="mt-4">Categories</h3>
+                <h3 className="mt-4">Filter by Tag</h3>
                 <hr />
                 {filterCategory ? (
                   <Button

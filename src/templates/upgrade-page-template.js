@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { graphql, Link } from "gatsby"
+import PPLogo from "../images/links-pp.png"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import Section from "../components/section"
@@ -61,7 +62,11 @@ const UpgradePageTemplate = ({ data: { datoCmsUpgrade } }) => {
                   <Tab.Container defaultActiveKey={packages[0].id}>
                     <Row>
                       <Col sm={3}>
-                        <Img className="my-3" fluid={bannerImage.fluid} />
+                        <img
+                          className="my-3 w-75 d-block mx-auto"
+                          src={PPLogo}
+                          alt="Links Performance Packages"
+                        />
                         <Nav variant="pills" className="flex-column">
                           {packages.map(pkg => {
                             return (
@@ -95,15 +100,15 @@ const UpgradePageTemplate = ({ data: { datoCmsUpgrade } }) => {
                                               .childMarkdownRemark.html,
                                         }}
                                       />
+                                      <div className="my-4 text-right">
+                                        <h4>
+                                          Price:{" "}
+                                          <Badge variant="primary">
+                                            RM{pkg.price}
+                                          </Badge>
+                                        </h4>
+                                      </div>
                                     </Package>
-                                    <div className="my-4 text-right">
-                                      <h4>
-                                        Price:{" "}
-                                        <Badge variant="primary">
-                                          RM{pkg.price}
-                                        </Badge>
-                                      </h4>
-                                    </div>
                                   </Container>
                                 </Section>
                               </Tab.Pane>

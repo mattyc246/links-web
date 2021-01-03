@@ -102,6 +102,14 @@ const Navigator = ({ allDatoCmsServicing, makes, models }) => {
               )
             })}
           </StyledNavDD>
+          <StyledNavDD title="Contact">
+            <NavDropdown.Item as={Link} to="/get-in-touch">
+              Get In Touch
+            </NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/locate-us">
+              Locate Us
+            </NavDropdown.Item>
+          </StyledNavDD>
           <StyledLink
             href="https://wa.link/vihotg"
             target="_blank"

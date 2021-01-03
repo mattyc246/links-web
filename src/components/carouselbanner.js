@@ -5,7 +5,6 @@ import Carousel from "react-bootstrap/Carousel"
 
 const StyledCarouselItem = styled(Carousel.Item)`
   width: 100%;
-  height: 520px;
 
   img {
     height: 100%;
@@ -22,19 +21,17 @@ const CarouselBanner = ({ images }) => {
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} controls={false}>
-      {
-        images.map(image => {
-          return(
-            <StyledCarouselItem key={image.originalId} interval={5000}>
-              <Img
-                className="d-block w-100"
-                fluid={image.fluid}
-                alt={image.alt}
-              />
-            </StyledCarouselItem>
-          )
-        })
-      }
+      {images.map(image => {
+        return (
+          <StyledCarouselItem key={image.originalId} interval={5000}>
+            <Img
+              className="d-block w-100"
+              fluid={image.fluid}
+              alt={image.alt}
+            />
+          </StyledCarouselItem>
+        )
+      })}
     </Carousel>
   )
 }

@@ -15,7 +15,7 @@ const HomeTitle = styled.h2`
   font-size: 38px;
   font-weight: 600;
   text-align: center;
-  margin: 2rem 0 5rem 0;
+  margin: 1.5rem 0rem;
 `
 
 const IndexPage = ({ data }) => {
@@ -23,6 +23,7 @@ const IndexPage = ({ data }) => {
     heroCarousel,
     latestVideo,
     videoDescriptionNode,
+    videoThumbnail,
     aboutUsNode,
     performanceTuningNode,
     servicesNode,
@@ -60,7 +61,7 @@ const IndexPage = ({ data }) => {
             </Row>
           </Container>
         </Section>
-        <Section light="true">
+        <Section light="true" noPad>
           <Container>
             <Row className="align-items-center">
               <Col lg={6}>
@@ -99,7 +100,7 @@ const IndexPage = ({ data }) => {
                     }
                   />
                 </Content>
-                <HomeVideo url={latestVideo.url} />
+                <HomeVideo url={`${latestVideo.url}#t=2.5`} thumbnail={videoThumbnail} />
               </Col>
             </Row>
           </Container>
@@ -121,7 +122,7 @@ export const PageQuery = graphql`
         }
       }
       heroCarousel {
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 1920) {
           ...GatsbyDatoCmsSizes
         }
         alt
@@ -144,9 +145,12 @@ export const PageQuery = graphql`
       servicesIcons {
         alt
         originalId
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 600) {
           ...GatsbyDatoCmsSizes
         }
+      }
+      videoThumbnail {
+        url
       }
       latestVideo {
         url

@@ -22,7 +22,8 @@ const BlogHeader = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(248, 155, 76, 0.8);
+    color: white;
 
     h1 {
       font-size: 24px;

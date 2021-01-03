@@ -65,7 +65,7 @@ const Overlay = styled.div`
   }
 `
 
-const HomeVideo = ({ url }) => {
+const HomeVideo = ({ url, thumbnail }) => {
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef(null)
@@ -85,6 +85,7 @@ const HomeVideo = ({ url }) => {
       <video
         ref={videoRef}
         src={url}
+        poster={thumbnail}
         {...(isMuted ? { muted: true } : { muted: false })}
       ></video>
       <Overlay>

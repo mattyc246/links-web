@@ -114,6 +114,14 @@ const MobileNav = ({ allDatoCmsServicing, makes, models }) => {
             )
           })}
         </NavDropdownMenu>
+        <NavDropdownMenu title="Contact">
+          <NavDropdown.Item as={Link} to="/get-in-touch">
+            Get In Touch
+          </NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/locate-us">
+            Locate Us
+          </NavDropdown.Item>
+        </NavDropdownMenu>
       </StyledLinks>
     </StyledNav>
   )

@@ -12,7 +12,7 @@ import {
 import NavDropdown from "react-bootstrap/NavDropdown"
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu"
 
-const StyledLink = styled(Nav.Link)`
+const StyledLink = styled.a`
   text-transform: uppercase;
   margin: 0 1rem;
   color: white;
@@ -102,13 +102,25 @@ const Navigator = ({ allDatoCmsServicing, makes, models }) => {
               )
             })}
           </StyledNavDD>
-          <StyledLink>
+          <StyledLink
+            href="https://wa.link/vihotg"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faWhatsapp} />
           </StyledLink>
-          <StyledLink>
+          <StyledLink
+            href="https://www.facebook.com/links.com.my/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faFacebookSquare} />
           </StyledLink>
-          <StyledLink>
+          <StyledLink
+            href="https://www.instagram.com/shirleylinks/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FontAwesomeIcon icon={faInstagram} />
           </StyledLink>
         </Nav>

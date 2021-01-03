@@ -15,7 +15,7 @@ const HomeTitle = styled.h2`
   font-size: 38px;
   font-weight: 600;
   text-align: center;
-  margin: 2rem 0 5rem 0;
+  margin: 1.5rem 0rem;
 `
 
 const IndexPage = ({ data }) => {
@@ -121,7 +121,7 @@ export const PageQuery = graphql`
         }
       }
       heroCarousel {
-        fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
+        fluid(maxWidth: 1920, imgixParams: { fm: "jpg", auto: "compress" }) {
           ...GatsbyDatoCmsSizes
         }
         alt

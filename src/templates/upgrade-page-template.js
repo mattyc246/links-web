@@ -56,82 +56,83 @@ const UpgradePageTemplate = ({ data: { datoCmsUpgrade } }) => {
                 __html: descriptionNode.childMarkdownRemark.html,
               }}
             ></div>
-            {packages.length > 0 ? (
-              <Card className="my-5">
-                <Card.Body className="shadow">
-                  <Tab.Container defaultActiveKey={packages[0].id}>
-                    <Row>
-                      <Col sm={3}>
-                        <img
-                          className="my-3 w-75 d-block mx-auto"
-                          src={PPLogo}
-                          alt="Links Performance Packages"
-                        />
-                        <Nav variant="pills" className="flex-column">
-                          {packages.map(pkg => {
-                            return (
-                              <Nav.Item key={pkg.id}>
-                                <Nav.Link eventKey={pkg.id}>
-                                  {pkg.packageTitle}
-                                </Nav.Link>
-                              </Nav.Item>
-                            )
-                          })}
-                        </Nav>
-                      </Col>
-                      <Col sm={9}>
-                        <img
-                          className="d-block mx-auto my-4"
-                          src={Logo}
-                          alt="Links Engineering"
-                          style={{ width: "25%" }}
-                        />
-                        <Tab.Content>
-                          {packages.map(pkg => {
-                            return (
-                              <Tab.Pane key={pkg.id} eventKey={pkg.id}>
-                                <Section>
-                                  <Container>
-                                    <Package>
-                                      <div
-                                        dangerouslySetInnerHTML={{
-                                          __html:
-                                            pkg.packageDetailsNode
-                                              .childMarkdownRemark.html,
-                                        }}
-                                      />
-                                      <div className="my-4 text-right">
-                                        <h4>
-                                          Price:{" "}
-                                          <Badge variant="primary">
-                                            RM{pkg.price}
-                                          </Badge>
-                                        </h4>
-                                      </div>
-                                    </Package>
-                                  </Container>
-                                </Section>
-                              </Tab.Pane>
-                            )
-                          })}
-                          <Button
-                            className="mx-auto d-block"
-                            as={Link}
-                            to="/contact"
-                            style={{ width: "80%" }}
-                          >
-                            Contact Us
-                          </Button>
-                        </Tab.Content>
-                      </Col>
-                    </Row>
-                  </Tab.Container>
-                </Card.Body>
-              </Card>
-            ) : (
-              <h3 className="text-center my-5">Contact Us To Discuss</h3>
-            )}
           </Container>
+          <Section className="my-3">
+            <Container>
+              {packages.length > 0 ? (
+                <Card
+                  style={{ backgroundColor: "transparent" }}
+                  className="my-5 border-0"
+                >
+                  <Card.Body>
+                    <Tab.Container defaultActiveKey={packages[0].id}>
+                      <Row>
+                        <Col sm={3}>
+                          <img
+                            className="my-3 w-75 d-block mx-auto"
+                            src={PPLogo}
+                            alt="Links Performance Packages"
+                          />
+                          <Nav variant="pills" className="flex-column">
+                            {packages.map(pkg => {
+                              return (
+                                <Nav.Item key={pkg.id}>
+                                  <Nav.Link eventKey={pkg.id}>
+                                    {pkg.packageTitle}
+                                  </Nav.Link>
+                                </Nav.Item>
+                              )
+                            })}
+                          </Nav>
+                        </Col>
+                        <Col sm={9}>
+                          <Tab.Content>
+                            {packages.map(pkg => {
+                              return (
+                                <Tab.Pane key={pkg.id} eventKey={pkg.id}>
+                                  <Section>
+                                    <Container>
+                                      <Package>
+                                        <div
+                                          dangerouslySetInnerHTML={{
+                                            __html:
+                                              pkg.packageDetailsNode
+                                                .childMarkdownRemark.html,
+                                          }}
+                                        />
+                                        <div className="my-4 text-right">
+                                          <h4>
+                                            Price:{" "}
+                                            <Badge variant="primary">
+                                              RM{pkg.price}
+                                            </Badge>
+                                          </h4>
+                                        </div>
+                                      </Package>
+                                    </Container>
+                                  </Section>
+                                </Tab.Pane>
+                              )
+                            })}
+                            <Button
+                              className="mx-auto d-block"
+                              as={Link}
+                              to="/get-in-touch"
+                              style={{ width: "80%" }}
+                            >
+                              Contact Us
+                            </Button>
+                          </Tab.Content>
+                        </Col>
+                      </Row>
+                    </Tab.Container>
+                  </Card.Body>
+                </Card>
+              ) : (
+                <h3 className="text-center my-5">Contact Us To Discuss</h3>
+              )}
+            </Container>
+          </Section>
           <div className="d-flex flex-wrap">
             {gallery.map((image, idx) => {
               return (

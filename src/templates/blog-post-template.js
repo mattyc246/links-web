@@ -1,4 +1,5 @@
 import React from "react"
+import moment from "moment"
 import styled from "styled-components"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
@@ -10,6 +11,12 @@ const BlogHeader = styled.div`
   width: 100%;
   height: 520px;
   position: relative;
+
+  .btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
   .details {
     position: absolute;
@@ -70,27 +77,35 @@ const BlogBody = styled.div`
 
 const BlogTemplate = ({ data }) => {
   const {
-    datoCmsBlog: { title, bodyNode, thumbnail, seoMetaTags },
+    datoCmsBlog: { title, bodyNode, thumbnail, seoMetaTags, meta },
   } = data
 
   return (
     <Layout seo={seoMetaTags}>
+      <BlogHeader>
+        <Button className="my-2" as={Link} to="/blog" variant="primary">
+          Back To Blog
+        </Button>
+        <img src={thumbnail.url} alt={thumbnail.alt} />
+        <div className="details">
+          <h1 className="my-0">{title}</h1>
+        </div>
+      </BlogHeader>
       <Section light="true">
         <Container>
-          <Button className="my-2" as={Link} to="/blog" variant="primary">
-            Back To Blog
-          </Button>
-          <BlogHeader className="my-3">
-            <img src={thumbnail.url} alt={thumbnail.alt} />
-            <div className="details">
-              <h1 className="my-0">{title}</h1>
-            </div>
-          </BlogHeader>
-          <BlogBody
-            dangerouslySetInnerHTML={{
-              __html: bodyNode.childMarkdownRemark.html,
-            }}
-          ></BlogBody>
+          <BlogBody>
+            <h2>{title}</h2>
+            <small className="text-light">
+              Published On: {moment(meta.publishedAt).format("MMMM Do YYYY")}
+            </small>
+            <hr />
+            <div
+              className="my-3"
+              dangerouslySetInnerHTML={{
+                __html: bodyNode.childMarkdownRemark.html,
+              }}
+            ></div>
+          </BlogBody>
         </Container>
       </Section>
     </Layout>
@@ -113,6 +128,9 @@ export const pageQuery = graphql`
       thumbnail {
         url
         alt
+      }
+      meta {
+        publishedAt
       }
     }
   }

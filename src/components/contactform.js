@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { navigate } from "gatsby"
 import styled from "styled-components"
 import Loader from "../images/loader.svg"
 import { Form, Button } from "react-bootstrap"
@@ -40,25 +41,28 @@ const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    const form = e.target
     setError(false)
     setSubmitting(true)
 
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...formFields }),
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...formFields,
+      }),
     })
       .then(() => {
-        setSuccess(true)
         setFormFields({
           name: "",
           email: "",
           enquiryType: "",
           message: "",
         })
+        navigate(form.getAttribute("action"))
       })
       .catch(error => {
-        console.log(error)
         setSubmitting(false)
         setError(true)
       })
@@ -98,7 +102,15 @@ const ContactForm = () => {
           )}
         </SubmissionContainer>
       ) : (
-        <Form onSubmit={e => handleSubmit(e)}>
+        <Form
+          name="contact"
+          method="post"
+          action="/thanks"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={e => handleSubmit(e)}
+        >
+          <input type="hidden" name="form-name" value="contact" />
           <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control

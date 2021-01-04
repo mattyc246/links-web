@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Loader from "../images/loader.svg"
 import { Form, Button } from "react-bootstrap"
-import Axios from "axios"
 
 const SubmissionContainer = styled.div`
   width: 100%;
@@ -13,12 +12,18 @@ const SubmissionContainer = styled.div`
   align-items: center;
 `
 
+const encode = data => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&")
+}
+
 const ContactForm = () => {
   const [valid, setValid] = useState(false)
   const [formFields, setFormFields] = useState({
     name: "",
     email: "",
-    enquiry_type: "",
+    enquiryType: "",
     message: "",
   })
   const [submitting, setSubmitting] = useState(false)
@@ -38,33 +43,30 @@ const ContactForm = () => {
     setError(false)
     setSubmitting(true)
 
-    Axios.post(
-      "https://links-cms.herokuapp.com/enquiries",
-      JSON.stringify(formFields),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then(result => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...formFields }),
+    })
+      .then(() => {
         setSuccess(true)
         setFormFields({
           name: "",
           email: "",
-          enquiry_type: "",
+          enquiryType: "",
           message: "",
         })
       })
-      .catch(err => {
+      .catch(error => {
+        console.log(error)
         setSubmitting(false)
         setError(true)
       })
   }
 
   useEffect(() => {
-    const { name, email, enquiry_type, message } = formFields
-    if (name && email && enquiry_type && message) {
+    const { name, email, enquiryType, message } = formFields
+    if (name && email && enquiryType && message) {
       setValid(true)
     } else {
       setValid(false)
@@ -73,7 +75,7 @@ const ContactForm = () => {
 
   return (
     <>
-      <p>
+      <p className="text-center">
         Drop us a message, we will aim to respond to all enquiries within 24-48
         hours.
       </p>
@@ -124,8 +126,8 @@ const ContactForm = () => {
             <Form.Control
               className="border border-dark"
               as="select"
-              name="enquiry_type"
-              value={formFields.enquiry_type}
+              name="enquiryType"
+              value={formFields.enquiryType}
               onChange={e => handleChange(e)}
             >
               <option disabled value="">

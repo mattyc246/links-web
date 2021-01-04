@@ -28,7 +28,6 @@ const ContactForm = () => {
     message: "",
   })
   const [submitting, setSubmitting] = useState(false)
-  const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
 
   const handleChange = e => {
@@ -92,14 +91,10 @@ const ContactForm = () => {
       )}
       {submitting ? (
         <SubmissionContainer>
-          {success ? (
-            <h3>Thank you. We will get back to you shortly.</h3>
-          ) : (
-            <>
-              <img src={Loader} alt="Loader" width="125" />
-              <h5>Submitting...</h5>
-            </>
-          )}
+          <>
+            <img src={Loader} alt="Loader" width="125" />
+            <h5>Submitting...</h5>
+          </>
         </SubmissionContainer>
       ) : (
         <Form

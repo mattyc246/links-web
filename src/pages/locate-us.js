@@ -1,4 +1,5 @@
 import React from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Section from "../components/section"
 import { Container, Row, Col } from "react-bootstrap"

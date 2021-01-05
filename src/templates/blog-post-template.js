@@ -9,7 +9,6 @@ import Button from "react-bootstrap/Button"
 
 const BlogHeader = styled.div`
   width: 100%;
-  height: 520px;
   position: relative;
 
   .btn {
@@ -96,7 +95,8 @@ const BlogTemplate = ({ data }) => {
           <BlogBody>
             <h2>{title}</h2>
             <small className="text-light">
-              Published On: {moment(meta.publishedAt).format("MMMM Do YYYY")}
+              <strong>Published On:</strong>{" "}
+              {moment(meta.publishedAt).format("MMMM Do YYYY")}
             </small>
             <hr />
             <div

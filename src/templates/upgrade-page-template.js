@@ -77,7 +77,7 @@ const UpgradePageTemplate = ({ data: { datoCmsUpgrade } }) => {
                             {packages.map(pkg => {
                               return (
                                 <Nav.Item key={pkg.id}>
-                                  <Nav.Link eventKey={pkg.id}>
+                                  <Nav.Link className="text-center" eventKey={pkg.id}>
                                     {pkg.packageTitle}
                                   </Nav.Link>
                                 </Nav.Item>

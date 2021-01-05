@@ -88,7 +88,7 @@ const Blog = ({ data }) => {
                         <div className="d-flex flex-column">
                           <h2>{title}</h2>
                           <small className="text-light">
-                            Published On:{" "}
+                            <strong>Published On:</strong>{" "}
                             {moment(meta.publishedAt).format("MMMM Do YYYY")}
                           </small>
                           <p className="my-3">
